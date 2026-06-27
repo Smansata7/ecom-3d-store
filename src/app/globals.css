@@ -177,6 +177,45 @@
   animation: float-y 9s ease-in-out infinite;
 }
 
+/* Hero "filament -> finished product" print animation.
+   One 7s loop, all tracks aligned. SVG geometry (y/height) is animated via CSS;
+   the clip rect defaults to the finished state so non-supporting engines still
+   show the full piece. */
+@keyframes hero-build {
+  0%   { y: 300px; height: 0px; }
+  62%  { y: 86px;  height: 214px; }
+  100% { y: 86px;  height: 214px; }
+}
+@keyframes hero-head-y {
+  0%   { transform: translateY(214px); }
+  62%  { transform: translateY(0); }
+  100% { transform: translateY(0); }
+}
+@keyframes hero-head-x {
+  0%, 100% { transform: translateX(-54px); }
+  50%      { transform: translateX(54px); }
+}
+@keyframes hero-spin { to { transform: rotate(360deg); } }
+@keyframes hero-feed { to { stroke-dashoffset: -32; } }
+@keyframes hero-finish {
+  0%, 58% { opacity: 0; }
+  80%     { opacity: 0.9; }
+  100%    { opacity: 0; }
+}
+
+.hero-build   { animation: hero-build 7s ease-in-out infinite; }
+.hero-head-y  { animation: hero-head-y 7s ease-in-out infinite; }
+.hero-head-x  { animation: hero-head-x 1.5s ease-in-out infinite; }
+.hero-spin    { animation: hero-spin 6s linear infinite; transform-box: fill-box; transform-origin: center; }
+.hero-feed    { stroke-dasharray: 5 5; animation: hero-feed 0.9s linear infinite; }
+.hero-finish  { animation: hero-finish 7s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-build, .hero-head-y, .hero-head-x, .hero-spin, .hero-feed, .hero-finish {
+    animation: none;
+  }
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: transparent; }
