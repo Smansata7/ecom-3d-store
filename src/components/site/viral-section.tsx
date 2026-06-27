@@ -18,7 +18,7 @@ export function ViralSection({ items }: { items: ViralDoc[] }) {
           </h2>
           <p className="mt-3 max-w-xl text-muted-foreground">
             The pieces people keep asking for. Open one to read about it and grab the
-            files from GitHub — print your own, or message me for a finished one.
+            files from GitHub, or message me if you&apos;d rather I print you a finished one.
           </p>
         </div>
       </div>

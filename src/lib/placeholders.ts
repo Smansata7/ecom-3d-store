@@ -29,7 +29,7 @@ export const placeholderArtworks: ArtworkDoc[] = [
     slug: 'voronoi-vase',
     tagline: 'Parametric skin, vase mode',
     summary:
-      'A vase-mode print wrapped in a parametric Voronoi shell — light, airy, and surprisingly strong. Lovely with dried stems.',
+      'A vase-mode print wrapped in a parametric Voronoi shell. Light, airy and surprisingly strong, and lovely with dried stems.',
     category: 'decor',
     materials: ['PLA', 'PETG'],
     printTimeHours: 6,
@@ -42,7 +42,7 @@ export const placeholderArtworks: ArtworkDoc[] = [
     slug: 'articulated-dragon',
     tagline: 'Print-in-place, no supports',
     summary:
-      'A fully articulated dragon printed in a single go — every joint moves, with zero assembly and zero supports.',
+      'A fully articulated dragon printed in a single go. Every joint moves, with zero assembly and zero supports.',
     category: 'toys',
     materials: ['PLA'],
     printTimeHours: 9,
@@ -67,7 +67,7 @@ export const placeholderArtworks: ArtworkDoc[] = [
     slug: 'cosplay-pauldron',
     tagline: 'Light, tough, screen-ready',
     summary:
-      'A screen-accurate shoulder piece in carbon-fibre nylon — light enough to wear all day, tough enough to survive a con.',
+      'A screen-accurate shoulder piece in carbon-fibre nylon. Light enough to wear all day, tough enough to survive a con.',
     category: 'cosplay',
     materials: ['PA-CF'],
     printTimeHours: 22,
@@ -79,7 +79,7 @@ export const placeholderArtworks: ArtworkDoc[] = [
     slug: 'modular-desk-tray',
     tagline: 'Tile your own workspace',
     summary:
-      'Snap-together trays that tile to fit any desk. Configure it for pens, cables, dice — whatever you need.',
+      'Snap-together trays that tile to fit any desk. Configure it for pens, cables, dice, whatever you need.',
     category: 'functional',
     materials: ['PETG'],
     printTimeHours: 4,
@@ -91,7 +91,7 @@ export const placeholderArtworks: ArtworkDoc[] = [
     slug: 'topology-bowl',
     tagline: 'Math-rendered marble',
     summary:
-      'A bowl grown from a mathematical surface and printed in a marbled blend — no two ever come out the same.',
+      'A bowl grown from a mathematical surface and printed in a marbled blend, so no two ever come out the same.',
     category: 'experimental',
     materials: ['PLA'],
     printTimeHours: 5,
@@ -129,7 +129,7 @@ export const placeholderViral: ViralDoc[] = [
     title: 'Mech Keychain',
     githubUrl: 'https://github.com/Smansata7',
     tags: ['fidget', 'gift'],
-    pitch: 'A tiny articulated mech that fits on your keys — the perfect cheap, addictive gift print.',
+    pitch: 'A tiny articulated mech that fits on your keys. The perfect cheap, addictive gift print.',
     cover: img('viral-mech'),
   },
 ]

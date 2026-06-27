@@ -20,7 +20,7 @@ export function FeaturedSection({ items }: { items: ArtworkDoc[] }) {
               A few favourites.
             </h2>
             <p className="mt-3 max-w-xl text-muted-foreground">
-              Hover to take a closer look — videos play, photos hold still. Tap any
+              Hover to take a closer look: videos play, photos hold still. Tap any
               piece for the full story and a direct line to me.
             </p>
           </div>

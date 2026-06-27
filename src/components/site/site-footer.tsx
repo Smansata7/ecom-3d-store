@@ -15,8 +15,8 @@ export function SiteFooter() {
             <span className="font-display text-lg font-semibold">{siteConfig.name}</span>
           </div>
           <p className="max-w-xs text-sm text-muted-foreground">
-            A small studio making sculptural and functional 3D-printed pieces — see
-            something you like, and reach out.
+            A small studio making sculptural and functional 3D printed pieces, printed to
+            order in the colours and materials you want. See something you like? Reach out.
           </p>
         </div>
 

@@ -41,8 +41,8 @@ export default async function GalleryPage() {
             Everything off <span className="accent-text">the bed.</span>
           </h1>
           <p className="max-w-xl text-muted-foreground">
-            An endless reel of the work. Hover to pause and take a closer look —
-            videos play, photos hold. Tap any piece for the details and to start a build.
+            An endless reel of the work. Hover to pause and take a closer look:
+            videos play, photos hold. Tap any piece for the details, or to start a build.
           </p>
           {showPlaceholderNote && (
             <p className="mt-2 inline-block w-fit rounded-full border border-dashed border-border bg-background/40 px-3 py-1 text-xs text-muted-foreground">

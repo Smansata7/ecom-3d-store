@@ -146,8 +146,8 @@ export function ArtworkDialog({
           <div className="mt-5 flex items-center gap-2 rounded-xl border border-dashed border-border bg-background/30 px-4 py-3 text-sm">
             <Sparkles className="h-4 w-4 text-filament-sun" />
             <span className="text-muted-foreground">
-              <span className="text-foreground">Made to order.</span> Want this — or a custom version?
-              Message me and we&apos;ll build it together.
+              <span className="text-foreground">Made to order.</span> Want this in your own
+              size, colour or in carbon fibre? Message me and we&apos;ll build it together.
             </span>
           </div>
 

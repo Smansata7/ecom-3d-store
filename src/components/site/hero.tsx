@@ -28,7 +28,7 @@ export function Hero() {
             transition={{ duration: 0.8, ease, delay: 0.05 }}
             className="mt-6 text-balance font-display text-5xl font-semibold leading-[1.02] tracking-tight sm:text-6xl lg:text-7xl"
           >
-            Objects worth keeping, <span className="accent-text">made to order.</span>
+            Products worth printing, <span className="accent-text">made to order.</span>
           </motion.h1>
 
           <motion.p
@@ -37,9 +37,9 @@ export function Hero() {
             transition={{ duration: 0.8, ease, delay: 0.15 }}
             className="mt-7 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg"
           >
-            A small studio of sculptural and functional prints — vases, lamps, figures,
-            props and the occasional strange experiment. Browse the work; if something
-            speaks to you, one tap reaches me directly.
+            I&apos;m a small 3D printing studio making vases, lamps, figures and props.
+            I print to order in the colours you want, and in carbon fibre when you need
+            something tougher. See something you like? Message me directly.
           </motion.p>
 
           <motion.div

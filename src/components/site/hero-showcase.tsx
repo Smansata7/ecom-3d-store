@@ -17,8 +17,11 @@ export function HeroShowcase() {
   }, [])
 
   return (
-    <div className="relative mx-auto aspect-square w-full max-w-md overflow-hidden rounded-3xl border border-border bg-card/40 shadow-2xl backdrop-blur-sm lg:max-w-none">
-      <div className="absolute inset-0 grid-bg opacity-60" />
+    <div className="relative mx-auto aspect-square w-full max-w-md overflow-hidden rounded-3xl border border-border bg-card shadow-2xl ring-1 ring-inset ring-white/5 lg:max-w-none">
+      {/* opaque base so the page grid behind doesn't bleed through and clash */}
+      <div className="absolute inset-0 bg-gradient-to-b from-card via-card to-background" />
+      {/* the panel's own print-bed grid, contained and softly faded at the edges */}
+      <div className="absolute inset-0 grid-bg opacity-40 [mask-image:radial-gradient(ellipse_85%_85%_at_50%_55%,black_55%,transparent_100%)]" />
 
       {/* top bar */}
       <div className="absolute inset-x-0 top-0 z-10 flex items-center justify-between px-4 py-3">
