@@ -47,11 +47,9 @@ function Media({
 export function ArtworkCard({
   artwork,
   priority,
-  span,
 }: {
   artwork: ArtworkDoc
   priority?: boolean
-  span?: 'tall' | 'wide' | 'square'
 }) {
   const [open, setOpen] = useState(false)
   const cover = resolveMedia(artwork.cover, artwork.title)
@@ -79,12 +77,7 @@ export function ArtworkCard({
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-80px' }}
         transition={{ duration: 0.5, ease: [0.22, 0.9, 0.32, 1] }}
-        className={cn(
-          'group relative block w-full overflow-hidden rounded-2xl border border-border bg-card text-left',
-          span === 'tall' && 'aspect-[3/4] md:row-span-2',
-          span === 'wide' && 'aspect-[4/3] md:col-span-2',
-          (!span || span === 'square') && 'aspect-square',
-        )}
+        className="group relative block aspect-[4/5] w-full overflow-hidden rounded-2xl border border-border bg-card text-left"
       >
         {cover.url ? (
           <Media
@@ -97,8 +90,8 @@ export function ArtworkCard({
           />
         ) : (
           <div className="absolute inset-0 grid place-items-center bg-secondary/40">
-            <span className="px-4 text-center font-display text-lg text-muted-foreground">
-              {artwork.title}
+            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground/40">
+              no image yet
             </span>
           </div>
         )}

@@ -58,14 +58,9 @@ export default async function GalleryPage() {
         )}
       </div>
 
-      <div className="mt-12 grid auto-rows-[18rem] grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
+      <div className="mt-12 grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-3">
         {items.map((artwork, i) => (
-          <ArtworkCard
-            key={artwork.id}
-            artwork={artwork}
-            priority={i < 3}
-            span={i % 5 === 0 ? 'tall' : i % 5 === 3 ? 'wide' : 'square'}
-          />
+          <ArtworkCard key={artwork.id} artwork={artwork} priority={i < 3} />
         ))}
       </div>
     </section>

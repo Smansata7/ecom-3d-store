@@ -45,14 +45,9 @@ export function FeaturedSection({ items }: { items: ArtworkDoc[] }) {
         </p>
       )}
 
-      <div className="mt-10 grid auto-rows-[19rem] grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
-        {source.slice(0, 5).map((artwork, i) => (
-          <ArtworkCard
-            key={artwork.id}
-            artwork={artwork}
-            priority={i === 0}
-            span={i === 0 ? 'tall' : i === 3 ? 'wide' : 'square'}
-          />
+      <div className="mt-10 grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-3">
+        {source.slice(0, 6).map((artwork, i) => (
+          <ArtworkCard key={artwork.id} artwork={artwork} priority={i < 3} />
         ))}
       </div>
     </section>
