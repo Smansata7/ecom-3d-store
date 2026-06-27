@@ -6,7 +6,7 @@ export function SiteFooter() {
   return (
     <footer id="connect" className="relative mt-32 border-t border-border bg-background/40 backdrop-blur-sm">
       <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-filament-coral/60 to-transparent" />
-      <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-8 md:grid-cols-3">
+      <div className="mx-auto grid max-w-6xl gap-10 px-5 py-16 sm:px-8 md:grid-cols-3">
         <div className="space-y-4">
           <div className="flex items-center gap-2">
             <span className="grid h-8 w-8 place-items-center rounded-xl bg-gradient-to-br from-filament-coral via-filament-sun to-filament-violet">
@@ -15,7 +15,8 @@ export function SiteFooter() {
             <span className="font-display text-lg font-semibold">{siteConfig.name}</span>
           </div>
           <p className="max-w-xs text-sm text-muted-foreground">
-            A studio of one printer, many ideas, and a lot of filament. Built around the Creality K2 Plus.
+            A small studio making sculptural and functional 3D-printed pieces — see
+            something you like, and reach out.
           </p>
         </div>
 
@@ -26,7 +27,7 @@ export function SiteFooter() {
           <ul className="space-y-2">
             <li><Link href="/" className="hover:text-foreground">Home</Link></li>
             <li><Link href="/gallery" className="hover:text-foreground">Gallery</Link></li>
-            <li><Link href="/#printer" className="hover:text-foreground">The Printer</Link></li>
+            <li><Link href="/#trending" className="hover:text-foreground">Trending</Link></li>
             <li>
               {/* /admin is served by Payload, not a Next page route — plain anchor is correct. */}
               {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
@@ -63,10 +64,10 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-border/80">
-        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-2 px-5 py-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:px-8">
-          <p>© {new Date().getFullYear()} {siteConfig.name}. Printed with love and PETG.</p>
-          <p className="font-mono">
-            v0.1 · Creality K2 Plus · 600mm/s
+        <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-2 px-5 py-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:px-8">
+          <p>© {new Date().getFullYear()} {siteConfig.name}. All pieces made to order.</p>
+          <p className="font-mono text-muted-foreground/70">
+            Printed in-house · Creality K2 Plus
           </p>
         </div>
       </div>

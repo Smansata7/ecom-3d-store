@@ -43,34 +43,35 @@
 }
 
 :root {
-  --background: oklch(0.135 0.018 275);
-  --foreground: oklch(0.97 0.012 85);
+  /* Near-black, slightly warm — premium gallery backdrop */
+  --background: oklch(0.16 0.006 285);
+  --foreground: oklch(0.97 0.005 90);
 
-  --card: oklch(0.18 0.025 280);
-  --card-foreground: oklch(0.97 0.012 85);
-  --popover: oklch(0.16 0.022 280);
-  --popover-foreground: oklch(0.97 0.012 85);
+  --card: oklch(0.2 0.008 285);
+  --card-foreground: oklch(0.97 0.005 90);
+  --popover: oklch(0.18 0.008 285);
+  --popover-foreground: oklch(0.97 0.005 90);
 
-  --primary: oklch(0.78 0.21 32);
+  --primary: oklch(0.78 0.2 32);
   --primary-foreground: oklch(0.18 0.02 280);
-  --secondary: oklch(0.22 0.03 280);
-  --secondary-foreground: oklch(0.97 0.012 85);
-  --muted: oklch(0.22 0.025 280);
-  --muted-foreground: oklch(0.68 0.03 90);
-  --accent: oklch(0.78 0.18 165);
-  --accent-foreground: oklch(0.18 0.02 280);
+  --secondary: oklch(0.24 0.01 285);
+  --secondary-foreground: oklch(0.97 0.005 90);
+  --muted: oklch(0.24 0.008 285);
+  --muted-foreground: oklch(0.7 0.012 90);
+  --accent: oklch(0.24 0.01 285);
+  --accent-foreground: oklch(0.97 0.005 90);
   --destructive: oklch(0.62 0.22 25);
 
-  --border: oklch(1 0 0 / 8%);
+  --border: oklch(1 0 0 / 9%);
   --input: oklch(1 0 0 / 12%);
-  --ring: oklch(0.78 0.21 32);
+  --ring: oklch(0.78 0.2 32 / 60%);
 
-  /* Filament palette — maker-vibe accents */
-  --filament-coral: oklch(0.78 0.21 32);
-  --filament-mint: oklch(0.85 0.18 165);
-  --filament-violet: oklch(0.72 0.22 305);
-  --filament-sun: oklch(0.9 0.18 95);
-  --filament-cyan: oklch(0.83 0.14 220);
+  /* Accent palette — used sparingly, as accents, not fills */
+  --filament-coral: oklch(0.78 0.2 32);
+  --filament-mint: oklch(0.84 0.16 165);
+  --filament-violet: oklch(0.72 0.2 305);
+  --filament-sun: oklch(0.88 0.16 95);
+  --filament-cyan: oklch(0.82 0.13 220);
 
   --radius: 0.875rem;
 
@@ -84,79 +85,48 @@
   html {
     color-scheme: dark;
     @apply font-sans antialiased;
+    scroll-behavior: smooth;
   }
   body {
     @apply bg-background text-foreground;
-    background-image:
-      radial-gradient(60% 50% at 15% 0%, oklch(0.78 0.21 32 / 0.16), transparent 60%),
-      radial-gradient(50% 40% at 95% 10%, oklch(0.72 0.22 305 / 0.14), transparent 60%),
-      radial-gradient(70% 60% at 50% 110%, oklch(0.85 0.18 165 / 0.12), transparent 60%);
-    background-attachment: fixed;
   }
   ::selection {
     background: var(--filament-coral);
     color: var(--primary-foreground);
   }
+  h1, h2, h3 {
+    @apply font-display;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
 }
 
-/* Animated filament gradient text */
-.filament-text {
+/* Single-accent gradient text — reserve for ONE word at a time */
+.accent-text {
   background: linear-gradient(
     100deg,
-    var(--filament-coral) 0%,
-    var(--filament-sun) 35%,
-    var(--filament-mint) 60%,
-    var(--filament-violet) 85%,
-    var(--filament-coral) 100%
+    var(--filament-coral),
+    var(--filament-sun) 55%,
+    var(--filament-coral)
   );
-  background-size: 250% 100%;
+  background-size: 200% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: filament-flow 12s linear infinite;
+  animation: accent-flow 8s ease-in-out infinite alternate;
 }
-
-@keyframes filament-flow {
+@keyframes accent-flow {
   to {
-    background-position: 250% 0;
+    background-position: 100% 0;
   }
 }
 
-/* Layered "printed" text — extruded look */
-.printed-text {
-  text-shadow:
-    0 1px 0 oklch(0.78 0.21 32 / 0.6),
-    0 2px 0 oklch(0.72 0.22 305 / 0.45),
-    0 3px 0 oklch(0.85 0.18 165 / 0.35),
-    0 4px 0 oklch(0.9 0.18 95 / 0.25);
-}
-
-/* Subtle grid background */
-.grid-bg {
-  background-image:
-    linear-gradient(to right, oklch(1 0 0 / 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, oklch(1 0 0 / 0.04) 1px, transparent 1px);
-  background-size: 56px 56px;
-  mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
-}
-
-/* Marquee */
-.marquee {
-  animation: marquee 30s linear infinite;
-}
-@keyframes marquee {
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-/* Hover float */
-@keyframes float-y {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
-.float-y {
-  animation: float-y 5s ease-in-out infinite;
+/* Hairline divider gradient */
+.hairline {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--border), transparent);
 }
 
 /* Scrollbar */
@@ -167,5 +137,20 @@
   border-radius: 999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--filament-coral);
+  background: oklch(1 0 0 / 0.16);
+}
+
+/* Respect reduced-motion: kill all non-essential animation */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .accent-text {
+    animation: none;
+  }
 }

@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { motion } from 'motion/react'
 import { X } from 'lucide-react'
 import { InstagramIcon, WhatsAppIcon } from './brand-icons'
@@ -9,17 +9,39 @@ import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogClose } fr
 import { Badge } from '@/components/ui/badge'
 import { buildInstagramUrl, buildWhatsAppUrl } from '@/lib/site-config'
 import { cn } from '@/lib/utils'
-import type { ArtworkDoc, MediaDoc } from '@/lib/payload'
+import { resolveMedia, type ArtworkDoc } from '@/lib/media'
 
-function getMediaUrl(media: ArtworkDoc['cover']): string | null {
-  if (!media) return null
-  if (typeof media === 'string' || typeof media === 'number') return null
-  return (media as MediaDoc).url ?? null
-}
-
-function getMediaAlt(media: ArtworkDoc['cover'], fallback: string): string {
-  if (!media || typeof media === 'string' || typeof media === 'number') return fallback
-  return (media as MediaDoc).alt ?? fallback
+function Media({
+  url,
+  alt,
+  isVideo,
+  priority,
+  className,
+  sizes,
+}: {
+  url: string
+  alt: string
+  isVideo: boolean
+  priority?: boolean
+  className?: string
+  sizes?: string
+}) {
+  if (isVideo) {
+    return (
+      <video
+        src={url}
+        muted
+        loop
+        playsInline
+        autoPlay
+        preload="metadata"
+        className={className}
+      />
+    )
+  }
+  return (
+    <Image src={url} alt={alt} fill priority={priority} sizes={sizes} className={className} />
+  )
 }
 
 export function ArtworkCard({
@@ -32,93 +54,119 @@ export function ArtworkCard({
   span?: 'tall' | 'wide' | 'square'
 }) {
   const [open, setOpen] = useState(false)
-  const accent = artwork.accentColor || 'var(--filament-coral)'
-  const coverUrl = getMediaUrl(artwork.cover)
-  const coverAlt = getMediaAlt(artwork.cover, artwork.title)
+  const cover = resolveMedia(artwork.cover, artwork.title)
+
+  const gallery = useMemo(() => {
+    const items = (artwork.gallery ?? [])
+      .map((g) => resolveMedia(g?.media, artwork.title))
+      .filter((m) => m.url)
+    // include the cover first so the dialog always has at least one frame
+    return [cover, ...items].filter((m) => m.url) as { url: string; alt: string; isVideo: boolean }[]
+  }, [artwork.gallery, cover, artwork.title])
+
+  const [active, setActive] = useState(0)
+  const activeMedia = gallery[active] ?? cover
 
   return (
     <>
       <motion.button
         type="button"
-        onClick={() => setOpen(true)}
-        initial={{ opacity: 0, y: 24 }}
+        onClick={() => {
+          setActive(0)
+          setOpen(true)
+        }}
+        initial={{ opacity: 0, y: 18 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-80px' }}
-        transition={{ duration: 0.6, ease: [0.22, 0.9, 0.32, 1] }}
-        whileHover={{ y: -4 }}
+        transition={{ duration: 0.5, ease: [0.22, 0.9, 0.32, 1] }}
         className={cn(
-          'group relative block w-full overflow-hidden rounded-3xl border border-border bg-card text-left transition-shadow',
+          'group relative block w-full overflow-hidden rounded-2xl border border-border bg-card text-left',
           span === 'tall' && 'aspect-[3/4] md:row-span-2',
           span === 'wide' && 'aspect-[4/3] md:col-span-2',
           (!span || span === 'square') && 'aspect-square',
         )}
-        style={{ ['--accent' as never]: accent }}
       >
-        <div className="absolute inset-0 -z-10 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-60"
-          style={{ background: `radial-gradient(60% 60% at 50% 50%, ${accent}, transparent 70%)` }}
-        />
-
-        {coverUrl ? (
-          <Image
-            src={coverUrl}
-            alt={coverAlt}
-            fill
+        {cover.url ? (
+          <Media
+            url={cover.url}
+            alt={cover.alt}
+            isVideo={cover.isVideo}
             priority={priority}
             sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-            className="object-cover transition-transform duration-700 group-hover:scale-105"
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]"
           />
         ) : (
-          <div className="absolute inset-0 grid place-items-center">
-            <div
-              className="h-40 w-40 rounded-full blur-xl"
-              style={{ background: `radial-gradient(circle, ${accent}, transparent 70%)` }}
-            />
-            <span className="absolute font-display text-2xl text-muted-foreground">
+          <div className="absolute inset-0 grid place-items-center bg-secondary/40">
+            <span className="px-4 text-center font-display text-lg text-muted-foreground">
               {artwork.title}
             </span>
           </div>
         )}
 
-        <div className="absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-background via-background/80 to-transparent p-5 pt-16">
+        {/* readable caption gradient */}
+        <div className="absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-background/95 via-background/40 to-transparent p-5 pt-16">
           {artwork.category && (
-            <Badge variant="outline" className="border-white/20 bg-background/40 text-[10px] uppercase tracking-[0.2em] text-muted-foreground backdrop-blur">
+            <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
               {artwork.category}
-            </Badge>
+            </span>
           )}
-          <h3 className="mt-2 font-display text-xl font-semibold tracking-tight">
+          <h3 className="mt-1 font-display text-lg font-semibold tracking-tight">
             {artwork.title}
           </h3>
           {artwork.tagline && (
-            <p className="mt-1 line-clamp-1 text-sm text-muted-foreground">{artwork.tagline}</p>
+            <p className="mt-0.5 line-clamp-1 text-sm text-muted-foreground">{artwork.tagline}</p>
           )}
         </div>
-
-        <span
-          className="pointer-events-none absolute right-4 top-4 h-2 w-2 rounded-full opacity-80 transition-opacity duration-500 group-hover:opacity-100"
-          style={{ background: accent, boxShadow: `0 0 24px 0 ${accent}` }}
-        />
       </motion.button>
 
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="max-w-2xl border-border bg-card p-0">
+        <DialogContent className="max-w-3xl border-border bg-card p-0 overflow-hidden">
           <DialogTitle className="sr-only">{artwork.title}</DialogTitle>
           <DialogDescription className="sr-only">
             {artwork.tagline || 'Print details'}
           </DialogDescription>
 
-          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-t-lg">
-            {coverUrl ? (
-              <Image src={coverUrl} alt={coverAlt} fill className="object-cover" />
+          <div className="relative aspect-[4/3] w-full overflow-hidden bg-secondary/40">
+            {activeMedia.url ? (
+              <Media
+                url={activeMedia.url}
+                alt={activeMedia.alt}
+                isVideo={activeMedia.isVideo}
+                className="absolute inset-0 h-full w-full object-cover"
+              />
             ) : (
-              <div className="absolute inset-0 grid place-items-center bg-muted">
+              <div className="absolute inset-0 grid place-items-center">
                 <span className="font-display text-2xl text-muted-foreground">{artwork.title}</span>
               </div>
             )}
-            <DialogClose className="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full bg-background/70 backdrop-blur hover:bg-background">
+            <DialogClose className="absolute right-3 top-3 z-10 grid h-9 w-9 place-items-center rounded-full bg-background/70 backdrop-blur transition-colors hover:bg-background">
               <X className="h-4 w-4" />
               <span className="sr-only">Close</span>
             </DialogClose>
           </div>
+
+          {/* thumbnail strip when there's more than one frame */}
+          {gallery.length > 1 && (
+            <div className="flex gap-2 overflow-x-auto px-6 pt-4">
+              {gallery.map((m, i) => (
+                <button
+                  key={`${m.url}-${i}`}
+                  type="button"
+                  onClick={() => setActive(i)}
+                  className={cn(
+                    'relative h-14 w-14 shrink-0 overflow-hidden rounded-lg border transition-colors',
+                    i === active ? 'border-foreground' : 'border-border hover:border-muted-foreground',
+                  )}
+                >
+                  {m.isVideo ? (
+                    <video src={m.url} muted playsInline className="h-full w-full object-cover" />
+                  ) : (
+                    <Image src={m.url} alt={m.alt} fill sizes="56px" className="object-cover" />
+                  )}
+                </button>
+              ))}
+            </div>
+          )}
 
           <div className="p-6">
             <div className="flex items-start justify-between gap-3">
@@ -136,7 +184,7 @@ export function ArtworkCard({
             </div>
 
             {(artwork.materials?.length || artwork.printTimeHours) && (
-              <dl className="mt-5 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-background/40 p-4 text-sm">
+              <dl className="mt-5 grid grid-cols-2 gap-3 rounded-xl border border-border bg-background/40 p-4 text-sm">
                 {artwork.materials?.length ? (
                   <div>
                     <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
@@ -164,13 +212,13 @@ export function ArtworkCard({
                 className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-foreground px-5 py-3 text-sm font-medium text-background transition-transform hover:scale-[1.02]"
               >
                 <WhatsAppIcon className="h-4 w-4" />
-                Get this on WhatsApp
+                Enquire on WhatsApp
               </a>
               <a
                 href={buildInstagramUrl()}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex flex-1 items-center justify-center gap-2 rounded-full border border-border px-5 py-3 text-sm font-medium transition-colors hover:border-filament-violet hover:text-filament-violet"
+                className="inline-flex flex-1 items-center justify-center gap-2 rounded-full border border-border px-5 py-3 text-sm font-medium transition-colors hover:text-foreground"
               >
                 <InstagramIcon className="h-4 w-4" />
                 See more on Instagram

@@ -1,59 +1,14 @@
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { ArtworkCard } from './artwork-card'
-import type { ArtworkDoc } from '@/lib/payload'
+import type { ArtworkDoc } from '@/lib/media'
 
 const placeholders: ArtworkDoc[] = [
-  {
-    id: 'p1',
-    title: 'Voronoi Vase',
-    slug: 'voronoi-vase',
-    tagline: 'Vase mode + a parametric skin',
-    category: 'decor',
-    accentColor: 'var(--filament-coral)',
-    materials: ['PLA', 'PETG'],
-    printTimeHours: 6,
-  },
-  {
-    id: 'p2',
-    title: 'Articulated Dragon',
-    slug: 'articulated-dragon',
-    tagline: 'Print-in-place spine, no supports',
-    category: 'toys',
-    accentColor: 'var(--filament-mint)',
-    materials: ['PLA'],
-    printTimeHours: 9,
-  },
-  {
-    id: 'p3',
-    title: 'Lattice Lamp',
-    slug: 'lattice-lamp',
-    tagline: 'Translucent PETG over warm LEDs',
-    category: 'decor',
-    accentColor: 'var(--filament-violet)',
-    materials: ['PETG'],
-    printTimeHours: 14,
-  },
-  {
-    id: 'p4',
-    title: 'Cosplay Pauldron',
-    slug: 'cosplay-pauldron',
-    tagline: 'PA-CF — light, tough, screen-ready',
-    category: 'cosplay',
-    accentColor: 'var(--filament-sun)',
-    materials: ['PA-CF'],
-    printTimeHours: 22,
-  },
-  {
-    id: 'p5',
-    title: 'Modular Desk Tray',
-    slug: 'modular-desk-tray',
-    tagline: 'Tile your own workspace',
-    category: 'functional',
-    accentColor: 'var(--filament-cyan)',
-    materials: ['PETG'],
-    printTimeHours: 4,
-  },
+  { id: 'p1', title: 'Voronoi Vase', slug: 'voronoi-vase', tagline: 'Parametric skin, vase mode', category: 'decor' },
+  { id: 'p2', title: 'Articulated Dragon', slug: 'articulated-dragon', tagline: 'Print-in-place, no supports', category: 'toys' },
+  { id: 'p3', title: 'Lattice Lamp', slug: 'lattice-lamp', tagline: 'Translucent PETG over warm LEDs', category: 'decor' },
+  { id: 'p4', title: 'Cosplay Pauldron', slug: 'cosplay-pauldron', tagline: 'Light, tough, screen-ready', category: 'cosplay' },
+  { id: 'p5', title: 'Modular Desk Tray', slug: 'modular-desk-tray', tagline: 'Tile your own workspace', category: 'functional' },
 ]
 
 export function FeaturedSection({ items }: { items: ArtworkDoc[] }) {
@@ -61,24 +16,25 @@ export function FeaturedSection({ items }: { items: ArtworkDoc[] }) {
   const showPlaceholderNote = items.length === 0
 
   return (
-    <section className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
-      <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
+    <section className="relative mx-auto max-w-6xl px-5 py-24 sm:px-8 sm:py-28">
+      <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
         <div>
           <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-            {'// featured'}
+            {'// selected work'}
           </p>
           <h2 className="mt-2 font-display text-4xl font-semibold tracking-tight sm:text-5xl">
-            Pieces I'm proud of.
+            A few favourites.
           </h2>
           <p className="mt-3 max-w-xl text-muted-foreground">
-            A small curated selection — every one was real filament, real hours, and a lot of bed-leveling.
+            A small, rotating selection. Tap any piece for photos, video, materials —
+            and a direct line to me.
           </p>
         </div>
         <Link
           href="/gallery"
-          className="group inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm transition-colors hover:border-filament-coral hover:text-filament-coral"
+          className="group inline-flex shrink-0 items-center gap-2 rounded-full border border-border px-4 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
         >
-          Open full gallery
+          View all work
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
         </Link>
       </div>
@@ -89,7 +45,7 @@ export function FeaturedSection({ items }: { items: ArtworkDoc[] }) {
         </p>
       )}
 
-      <div className="mt-10 grid auto-rows-[20rem] grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-10 grid auto-rows-[19rem] grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
         {source.slice(0, 5).map((artwork, i) => (
           <ArtworkCard
             key={artwork.id}

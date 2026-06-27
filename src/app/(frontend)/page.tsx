@@ -1,10 +1,8 @@
 import { getPayloadClient } from '@/lib/payload'
-import type { ArtworkDoc } from '@/lib/payload'
+import type { ArtworkDoc, ViralDoc } from '@/lib/media'
 import { Hero } from '@/components/site/hero'
-import { StatsMarquee } from '@/components/site/marquee'
 import { FeaturedSection } from '@/components/site/featured-section'
-import { PrinterSection } from '@/components/site/printer-section'
-import { ViralTeaser } from '@/components/site/viral-teaser'
+import { ViralSection } from '@/components/site/viral-section'
 
 export const revalidate = 60
 
@@ -15,7 +13,7 @@ async function getFeatured(): Promise<ArtworkDoc[]> {
       collection: 'artworks',
       where: { featured: { equals: true } },
       limit: 6,
-      depth: 1,
+      depth: 2,
       sort: '-updatedAt',
     })
     return result.docs as unknown as ArtworkDoc[]
@@ -25,15 +23,31 @@ async function getFeatured(): Promise<ArtworkDoc[]> {
   }
 }
 
+async function getViral(): Promise<ViralDoc[]> {
+  try {
+    const payload = await getPayloadClient()
+    const result = await payload.find({
+      collection: 'viral-picks',
+      limit: 8,
+      depth: 1,
+      sort: 'order',
+    })
+    return result.docs as unknown as ViralDoc[]
+  } catch (err) {
+    console.warn('Viral fetch failed:', err)
+    return []
+  }
+}
+
 export default async function HomePage() {
-  const featured = await getFeatured()
+  const [featured, viral] = await Promise.all([getFeatured(), getViral()])
   return (
     <>
       <Hero />
-      <StatsMarquee />
+      <div className="hairline mx-auto max-w-6xl" />
       <FeaturedSection items={featured} />
-      <PrinterSection />
-      <ViralTeaser />
+      <div className="hairline mx-auto max-w-6xl" />
+      <ViralSection items={viral} />
     </>
   )
 }
