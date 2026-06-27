@@ -15,6 +15,9 @@ export type ArtworkDoc = {
   title: string
   slug: string
   tagline?: string | null
+  summary?: string | null
+  // Lexical rich-text JSON; rendered with @payloadcms/richtext-lexical/react
+  description?: { root?: unknown } | null
   category?: string | null
   materials?: string[] | null
   printTimeHours?: number | null

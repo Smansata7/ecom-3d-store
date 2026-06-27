@@ -30,8 +30,18 @@ export const Artworks: CollectionConfig = {
       admin: { description: 'One-line hook shown on cards.' },
     },
     {
+      name: 'summary',
+      type: 'textarea',
+      admin: {
+        description: '1–2 sentence blurb shown when a visitor hovers the piece in the gallery.',
+      },
+    },
+    {
       name: 'description',
       type: 'richText',
+      admin: {
+        description: 'The full story — shown when a visitor opens the piece.',
+      },
     },
     {
       name: 'category',
