@@ -1,15 +1,9 @@
 import { ViralCard } from './viral-card'
+import { placeholderViral } from '@/lib/placeholders'
 import type { ViralDoc } from '@/lib/media'
 
-const placeholders: ViralDoc[] = [
-  { id: 'v1', title: 'Articulated Koi', githubUrl: 'https://github.com/Smansata7', tags: ['print-in-place', 'no supports'] },
-  { id: 'v2', title: 'Gridfinity Set', githubUrl: 'https://github.com/Smansata7', tags: ['functional', 'desk'] },
-  { id: 'v3', title: 'Whisper Vase', githubUrl: 'https://github.com/Smansata7', tags: ['vase mode', 'decor'] },
-  { id: 'v4', title: 'Mech Keychain', githubUrl: 'https://github.com/Smansata7', tags: ['fidget', 'gift'] },
-]
-
 export function ViralSection({ items }: { items: ViralDoc[] }) {
-  const source = items.length > 0 ? items : placeholders
+  const source = items.length > 0 ? items : placeholderViral
   const showPlaceholderNote = items.length === 0
 
   return (

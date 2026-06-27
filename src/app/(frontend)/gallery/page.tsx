@@ -1,17 +1,9 @@
 import { getPayloadClient } from '@/lib/payload'
 import type { ArtworkDoc } from '@/lib/media'
 import { MarqueeGallery } from '@/components/site/marquee-gallery'
+import { placeholderArtworks } from '@/lib/placeholders'
 
 export const revalidate = 60
-
-const placeholders: ArtworkDoc[] = [
-  { id: 1, title: 'Voronoi Vase', slug: 'voronoi-vase', tagline: 'Parametric skin, vase mode', summary: 'A vase-mode print with a parametric Voronoi shell — light, airy, and surprisingly strong.', category: 'decor' },
-  { id: 2, title: 'Articulated Dragon', slug: 'articulated-dragon', tagline: 'Print-in-place spine', summary: 'A fully articulated dragon printed in one piece — every joint moves, no assembly needed.', category: 'toys' },
-  { id: 3, title: 'Lattice Lamp', slug: 'lattice-lamp', tagline: 'Translucent PETG, warm LEDs', summary: 'Translucent PETG lattice that scatters warm light into soft geometric shadows.', category: 'decor' },
-  { id: 4, title: 'Cosplay Pauldron', slug: 'cosplay-pauldron', tagline: 'Screen-ready, lightweight', summary: 'A screen-accurate shoulder piece in carbon-fibre nylon — light to wear, tough to break.', category: 'cosplay' },
-  { id: 5, title: 'Modular Desk Tray', slug: 'modular-desk-tray', tagline: 'Tile your workspace', summary: 'Snap-together trays that tile to fit any desk, configured however you like.', category: 'functional' },
-  { id: 6, title: 'Topology Bowl', slug: 'topology-bowl', tagline: 'Math-rendered marble', summary: 'A bowl grown from a mathematical surface, printed in a marbled blend — each one unique.', category: 'experimental' },
-]
 
 async function getAll(): Promise<ArtworkDoc[]> {
   try {
@@ -35,7 +27,7 @@ export const metadata = {
 
 export default async function GalleryPage() {
   const docs = await getAll()
-  const items = docs.length > 0 ? docs : placeholders
+  const items = docs.length > 0 ? docs : placeholderArtworks
   const showPlaceholderNote = docs.length === 0
 
   return (

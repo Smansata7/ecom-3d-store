@@ -1,19 +1,11 @@
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { MarqueeGallery } from './marquee-gallery'
+import { placeholderArtworks } from '@/lib/placeholders'
 import type { ArtworkDoc } from '@/lib/media'
 
-const placeholders: ArtworkDoc[] = [
-  { id: 'p1', title: 'Voronoi Vase', slug: 'voronoi-vase', tagline: 'Parametric skin, vase mode', summary: 'A vase-mode print with a parametric Voronoi shell — light, airy, and surprisingly strong. Beautiful with dried stems.', category: 'decor' },
-  { id: 'p2', title: 'Articulated Dragon', slug: 'articulated-dragon', tagline: 'Print-in-place, no supports', summary: 'A fully articulated dragon printed in one go — every joint moves, zero assembly, zero supports.', category: 'toys' },
-  { id: 'p3', title: 'Lattice Lamp', slug: 'lattice-lamp', tagline: 'Translucent PETG over warm LEDs', summary: 'A translucent PETG lattice that scatters warm LED light into soft geometric patterns across the room.', category: 'decor' },
-  { id: 'p4', title: 'Cosplay Pauldron', slug: 'cosplay-pauldron', tagline: 'Light, tough, screen-ready', summary: 'A screen-accurate shoulder piece in PA-CF — light enough to wear all day, tough enough to survive a con.', category: 'cosplay' },
-  { id: 'p5', title: 'Modular Desk Tray', slug: 'modular-desk-tray', tagline: 'Tile your own workspace', summary: 'Snap-together trays that tile to fit any desk. Configure it for pens, cables, dice — whatever you need.', category: 'functional' },
-  { id: 'p6', title: 'Topology Bowl', slug: 'topology-bowl', tagline: 'Math-rendered marble', summary: 'A bowl generated from a mathematical surface and printed in a marbled blend — no two come out the same.', category: 'experimental' },
-]
-
 export function FeaturedSection({ items }: { items: ArtworkDoc[] }) {
-  const source = items.length > 0 ? items : placeholders
+  const source = items.length > 0 ? items : placeholderArtworks
   const showPlaceholderNote = items.length === 0
 
   return (

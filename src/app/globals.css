@@ -129,12 +129,19 @@
   background: linear-gradient(to right, transparent, var(--border), transparent);
 }
 
-/* Subtle blueprint grid texture */
+/* Printer-bed / blueprint grid — fine 40px cells with bolder 200px majors,
+   like a build plate or cutting mat. This is the site's "canvas". */
 .grid-bg {
   background-image:
     linear-gradient(to right, oklch(1 0 0 / 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, oklch(1 0 0 / 0.05) 1px, transparent 1px);
-  background-size: 64px 64px;
+    linear-gradient(to bottom, oklch(1 0 0 / 0.05) 1px, transparent 1px),
+    linear-gradient(to right, oklch(1 0 0 / 0.11) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(1 0 0 / 0.11) 1px, transparent 1px);
+  background-size:
+    40px 40px,
+    40px 40px,
+    200px 200px,
+    200px 200px;
 }
 
 /* Fine dotted texture */
