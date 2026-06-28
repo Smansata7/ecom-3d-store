@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { motion } from 'motion/react'
 import { Menu } from 'lucide-react'
 import { InstagramIcon, WhatsAppIcon } from './brand-icons'
+import { Logo } from './logo'
 import {
   Sheet,
   SheetClose,
@@ -22,17 +23,6 @@ const nav = [
   { href: '/#trending', label: 'Trending' },
   { href: '/#connect', label: 'Connect' },
 ]
-
-function Logo() {
-  return (
-    <span className="flex items-center gap-2">
-      <span className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-filament-coral to-filament-sun">
-        <span className="h-1.5 w-1.5 rounded-full bg-background" />
-      </span>
-      <span className="font-display text-base font-semibold tracking-tight">{siteConfig.name}</span>
-    </span>
-  )
-}
 
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false)

@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { InstagramIcon, WhatsAppIcon } from './brand-icons'
+import { LogoMark } from './logo'
 import { siteConfig, buildInstagramUrl, buildWhatsAppUrl } from '@/lib/site-config'
 
 export function SiteFooter() {
@@ -8,10 +9,8 @@ export function SiteFooter() {
       <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-filament-coral/60 to-transparent" />
       <div className="mx-auto grid max-w-6xl gap-10 px-5 py-16 sm:px-8 md:grid-cols-3">
         <div className="space-y-4">
-          <div className="flex items-center gap-2">
-            <span className="grid h-8 w-8 place-items-center rounded-xl bg-gradient-to-br from-filament-coral via-filament-sun to-filament-violet">
-              <span className="h-2 w-2 rounded-full bg-background" />
-            </span>
+          <div className="group flex items-center gap-2.5">
+            <LogoMark className="h-9 w-9 shrink-0" />
             <span className="font-display text-lg font-semibold">{siteConfig.name}</span>
           </div>
           <p className="max-w-xs text-sm text-muted-foreground">

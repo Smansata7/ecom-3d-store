@@ -216,6 +216,20 @@
   }
 }
 
+/* Logo filament spool — gentle continuous spin, faster on hover */
+@keyframes spool-spin { to { transform: rotate(360deg); } }
+.spool-spin {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: spool-spin var(--spool-duration, 18s) linear infinite;
+}
+.group:hover .spool-spin {
+  --spool-duration: 3.5s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .spool-spin { animation: none; }
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: transparent; }

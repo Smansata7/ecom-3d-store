@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="512" height="512" role="img" aria-label="Asif's 3D Lab filament spool">
+  <defs>
+    <linearGradient id="filament" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f97347"/>
+      <stop offset="45%" stop-color="#ffcf4f"/>
+      <stop offset="100%" stop-color="#b072f0"/>
+    </linearGradient>
+  </defs>
+  <!-- flange disc (self-contained badge; crops nicely to a circle) -->
+  <circle cx="20" cy="20" r="19.25" fill="#1c1b21" stroke="#ffffff" stroke-opacity="0.12" stroke-width="1.5"/>
+  <!-- wound filament -->
+  <circle cx="20" cy="20" r="12.5" fill="none" stroke="url(#filament)" stroke-width="7"/>
+  <circle cx="20" cy="20" r="14.3" fill="none" stroke="#000000" stroke-opacity="0.14" stroke-width="0.6"/>
+  <circle cx="20" cy="20" r="12.5" fill="none" stroke="#ffffff" stroke-opacity="0.12" stroke-width="0.6"/>
+  <circle cx="20" cy="20" r="10.7" fill="none" stroke="#000000" stroke-opacity="0.14" stroke-width="0.6"/>
+  <!-- hub + mounting holes -->
+  <circle cx="20" cy="20" r="5.5" fill="#141318" stroke="#ffffff" stroke-opacity="0.12" stroke-width="1"/>
+  <circle cx="20" cy="20" r="1.8" fill="#9b97a3"/>
+  <g fill="#141318" stroke="#ffffff" stroke-opacity="0.12" stroke-width="0.5">
+    <circle cx="20" cy="9.2" r="1.4"/>
+    <circle cx="30.8" cy="20" r="1.4"/>
+    <circle cx="20" cy="30.8" r="1.4"/>
+    <circle cx="9.2" cy="20" r="1.4"/>
+  </g>
+</svg>
